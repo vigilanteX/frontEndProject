@@ -55,7 +55,7 @@ const Dankmemes = () => {
       .catch(err => {
         console.log(err);
       });
-    console.log(levelData);
+    // console.log(levelData);
   };
 
   useEffect(() => {
@@ -74,14 +74,13 @@ const Dankmemes = () => {
         <div className="container bg-image" style={{ margin: '0px', padding: '0px', maxWidth: '100%', height: '1920px' }}>
           <div className="row">
             <div className="col-md-4 card bg-light col-sm-8" style={{ marginTop: '18rem', marginBottom: '1rem' }}>
-            <Bar data={chartData} options={{
-                  responsive: true,
-                  title: { text: "THICCNESS SCALE", display: true },
-
-                }}/>
+            <Bar data={chartData} style={{backgroundColor:'white'}} options={{
+          responsive: true,
+          maintainAspectRatio: true,
+        }} height={270}/>
             </div>
 
-            <div className="col-md-4 card bg-light col-sm-5" style={{ marginTop: '2rem', marginBottom: '1rem' }}>
+            <div className="col-md-4 card bg-light col-sm-5" style={{ marginTop: '18rem', marginBottom: '1rem' }}>
 
 
               <Pie
@@ -90,14 +89,17 @@ const Dankmemes = () => {
                   responsive: true,
                   title: { text: "THICCNESS SCALE", display: true },
 
-                }}
+                }} style={{backgroundColor:'white'}}
               />
               
 
 
             </div>
             <div className="col-md-4 card bg-light col-sm-8" style={{ marginTop: '18rem', marginBottom: '1rem' }}>
-            <Line data={chartData} />
+            <Line data={chartData} options={{
+          responsive: true,
+          maintainAspectRatio: true,
+        }} height={270} style={{backgroundColor:'white'}}/>
 
             </div>
 
