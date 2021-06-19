@@ -25,7 +25,7 @@ class Navbar extends Component {
         return (
             <nav class="navbar navbar-light bg-light">
                 <span class="navbar-brand mb-0 h1">TwitIT</span>
-                <button className='btn btn-primary' onClick={this.Turnoff}>Turn Off</button>
+                <button className='btn btn-primary' onClick={this.Turnoff}><i class="fa fa-power-off" aria-hidden="true"></i></button>
             </nav>
         )
     }

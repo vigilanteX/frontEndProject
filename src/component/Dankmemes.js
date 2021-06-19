@@ -2,16 +2,19 @@ import React, { useState, useEffect } from "react";
 import { Bar, Line, Pie } from "react-chartjs-2";
 import axios from "axios";
 import Navbar from "./Navbar";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 const Dankmemes = () => {
   const [chartData, setChartData] = useState({});
   const [employeeSalary, setEmployeeSalary] = useState([]);
   const [employeeAge, setEmployeeAge] = useState([]);
   const [levelData, setLevelData] = useState({})
+  const[homeRedirect,setHomeRedirect]=useState(false)
 
-  const toggle = () => {
-    axios.get('http://localhost:8080/stop').then(console.log('stop'))
+
+  const toggle = async() => {
+    await axios.get('http://localhost:8080/stop')
+    setHomeRedirect(true)
 
 
   }
@@ -59,20 +62,26 @@ const Dankmemes = () => {
     chart()
     setInterval(() => chart(), 5000)
   }, []);
+  if(homeRedirect)
+  {
+    
+    return <Redirect to='/'/>
+  }
   return (
     <div className="App">
-      <nav className="navbar navbar-dark bg-dark">
-        <Link className="navbar-brand mb-0 h1" to='/'>TwitIT</Link>
-        {/* <Link to='/' style={{color:'white',textDecoration:'none'}}>Home</Link> */}
-        <button className='btn btn-danger' onClick={toggle}><i class="fa fa-power-off" aria-hidden="true"></i></button>
-
-      </nav>
+      <Navbar/>
       <div>
         <div className="container bg-image" style={{ margin: '0px', padding: '0px', maxWidth: '100%', height: '1920px' }}>
           <div className="row">
-            <div className="col-md-2 card bg-light col-sm-8" style={{ marginTop: '2rem', marginBottom: '1rem' }}></div>
+            <div className="col-md-4 card bg-light col-sm-8" style={{ marginTop: '18rem', marginBottom: '1rem' }}>
+            <Bar data={chartData} options={{
+                  responsive: true,
+                  title: { text: "THICCNESS SCALE", display: true },
 
-            <div className="col-md-5 card bg-light col-sm-5" style={{ marginTop: '2rem', marginBottom: '1rem' }}>
+                }}/>
+            </div>
+
+            <div className="col-md-4 card bg-light col-sm-5" style={{ marginTop: '2rem', marginBottom: '1rem' }}>
 
 
               <Pie
@@ -83,14 +92,17 @@ const Dankmemes = () => {
 
                 }}
               />
-              <Bar data={chartData} />
-              <Line data={chartData} />
+              
 
 
             </div>
-            <div className="col-md-2 card bg-light col-sm-8" style={{ marginTop: '2rem', marginBottom: '1rem' }}></div>
+            <div className="col-md-4 card bg-light col-sm-8" style={{ marginTop: '18rem', marginBottom: '1rem' }}>
+            <Line data={chartData} />
+
+            </div>
 
           </div>
+          
         </div>
       </div>
     </div>
@@ -98,3 +110,7 @@ const Dankmemes = () => {
 };
 
 export default Dankmemes;
+
+
+// <Bar data={chartData} />
+//               <Line data={chartData} />
